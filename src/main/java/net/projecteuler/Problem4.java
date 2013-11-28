@@ -11,6 +11,7 @@ import java.util.Set;
  * <p/>
  * Найдите самый большой палиндром, полученный произведением двух трёхзначных чисел.
  * <p/>
+ * <p/>
  * <B>Оригинал:</B>
  * <p/>
  * A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
