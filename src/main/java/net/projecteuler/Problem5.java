@@ -16,6 +16,25 @@ package net.projecteuler;
  */
 public class Problem5 {
     public static void main(String[] args) {
+        boolean answer = false;
+        for (int i = 1; ; i++) {
 
+            for (int j = 1; j <= 20; j++) {
+                if (isDividable(i, j)) {
+                    answer = true;
+                } else {
+                    answer = false;
+                    break;
+                }
+            }
+            if (answer) {
+                System.out.println(i);
+                break;
+            }
+        }
+    }
+
+    private static boolean isDividable(int dividend, int divider) {
+        return dividend % divider == 0;
     }
 }
