@@ -30,12 +30,17 @@ public class Problem6 {
     public static void main(String[] args) {
         // the square of the sum include the sum of the squares, so we should calculate only second part of sum.
         // (x + y + z...)^2 = x^2 + y^2 + z^2 + xy + xz + yz...
-        int sum = 0;
+        int result = 0;
+        int iterations = 0;
         for (int i = 1; i <= 100; i++) {
             for (int j = 1; j <= 100; j++) {
-                if (i != j) sum += i * j;
+                if (i != j) {
+                    iterations++;
+                    result += i * j;
+                }
             }
         }
-        System.out.println(sum);
+        System.out.println("Result: " + result);
+        System.out.println("Iterations: " + iterations);
     }
 }

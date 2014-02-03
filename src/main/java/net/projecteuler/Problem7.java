@@ -18,30 +18,34 @@ import java.util.Arrays;
  */
 public class Problem7 {
     public static void main(String[] args) {
-
         int n = 200000;
-
+        int result = 0;
+        int iterations = 0;
+        int counter = 0;
         boolean[] isPrime = new boolean[n];
         Arrays.fill(isPrime, true);
-        isPrime[1] = false;
-        for (int i = 2; i*i < n; i++) {
+
+        for (int i = 2; i * i < n; i++) {
             if (isPrime[i]) {
-                System.out.println(i);
-                for (int j = i*i; j < n; j += i) {
+                for (int j = i * i; j < n; j += i) {
+                    iterations++;
                     isPrime[j] = false;
                 }
             }
         }
 
-        int counter = 1;
-
-        for (int i = 0; i < n; i++) {
+        for (int i = 2; i < n; i++) {
             if (isPrime[i]) {
+                iterations++;
                 if (counter == 10002) {
-                    System.out.println(counter + ":" + i);
+                    result = i;
+                    break;
                 }
                 counter++;
             }
         }
+
+        System.out.println("Result: " + result);
+        System.out.println("Iterations: " + iterations);
     }
 }

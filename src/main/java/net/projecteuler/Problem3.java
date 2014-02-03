@@ -17,14 +17,21 @@ package net.projecteuler;
 public class Problem3 {
     public static void main(String[] args) {
         long n = 600851475143L;
+        long result = 0;
         long counter = 1;
+        int iterations = 0;
         while (counter != n) {
+            iterations++;
             counter++;
             if (n % counter == 0) {
                 n /= counter;
-                System.out.println(counter);
+                if (counter > result) {
+                    result = counter;
+                }
                 counter = 1;
             }
         }
+        System.out.println("Result: " + result);
+        System.out.println("Iterations: " + iterations);
     }
 }

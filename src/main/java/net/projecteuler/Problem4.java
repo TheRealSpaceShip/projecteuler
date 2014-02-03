@@ -1,8 +1,7 @@
 package net.projecteuler;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <B>Задача:</B>
@@ -20,25 +19,26 @@ import java.util.Set;
  */
 public class Problem4 {
     public static void main(String[] args) {
-        Set<Integer> palindromes = new HashSet<>();
+        int iterations = 0;
+        int result = 0;
+
+        List<Integer> duplicates = new ArrayList<>();
         for (int i = 100; i < 1000; i++) {
             for (int j = 100; j < 1000; j++) {
-                int result = i * j;
-                if (isPalindrome(result)) {
-                    System.out.println(result + " = " + i + " * " + j);
-                    palindromes.add(result);
+                if (!duplicates.isEmpty() && i < duplicates.get(duplicates.size() - 1)) break;
+                if (duplicates.contains(j)) continue;
+                iterations++;
+                int palindrome = i * j;
+                if (isPalindrome(palindrome)) {
+                    duplicates.add(j);
+                    if (palindrome > result) {
+                        result = palindrome;
+                    }
                 }
             }
         }
-        Iterator<Integer> iterator = palindromes.iterator();
-        int max = 0;
-        while (iterator.hasNext()) {
-            int val = iterator.next();
-            if (val > max) {
-                max = val;
-            }
-        }
-        System.out.println(max);
+        System.out.println("Result: " + result);
+        System.out.println("Iterations: " + iterations);
     }
 
     private static String revert(String str) {

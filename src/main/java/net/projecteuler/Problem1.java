@@ -16,10 +16,13 @@ package net.projecteuler;
  */
 public class Problem1 {
     public static void main(String[] args) {
-        int sum = 0;
-        for (int i = 0; i < 1000; i++) {
-            if (i % 3 == 0 || i % 5 == 0) sum += i;
+        int result = 0;
+        int iterations = 0;
+        for (int i = 5; i < 1000; i++) {
+            iterations++;
+            if (i % 3 == 0 || i % 5 == 0) result += i;
         }
-        System.out.println(sum);
+        System.out.println("Result: " + result);
+        System.out.println("Iterations: " + iterations);
     }
 }

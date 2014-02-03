@@ -17,21 +17,27 @@ package net.projecteuler;
 public class Problem5 {
     public static void main(String[] args) {
         boolean answer = false;
-        for (int i = 1; ; i++) {
-
+        int result = 20;
+        int iterations = 0;
+        for (int j = 1; j <= 20; j++) {
+            while (isDividable(result, j)) {
+                answer = true;
+            }
+        }
+        while (!answer) {
             for (int j = 1; j <= 20; j++) {
-                if (isDividable(i, j)) {
+                iterations++;
+                if (isDividable(result, j)) {
                     answer = true;
                 } else {
                     answer = false;
                     break;
                 }
             }
-            if (answer) {
-                System.out.println(i);
-                break;
-            }
+            result++;
         }
+        System.out.println("Result: " + result);
+        System.out.println("Iterations: " + iterations);
     }
 
     private static boolean isDividable(int dividend, int divider) {
