@@ -56,35 +56,54 @@ import java.util.List;
  * 71636269561882670428252483600823257530420752963450
  */
 public class Problem8 {
+    
+    private static int iterations = 0;
+    
     public static final void main(String... args) {
         String bigNumber = "7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450";
 
         List<Integer> numbers = new ArrayList<>();
+        
         for (int i = 0; i < bigNumber.length(); i++) {
-            numbers.add((int) bigNumber.charAt(i));
+            numbers.add(Character.digit(bigNumber.charAt(i), 10));
         }
 
         int result = 0;
-        int iterations = 0;
-        for (int i = 0; i < numbers.size() - 5; i++) {
-            iterations++;
-            if (Math.abs(numbers.get(i) - numbers.get(i + 1)) == 1 &&
-                Math.abs(numbers.get(i + 1) - numbers.get(i + 2)) == 1 &&
-                Math.abs(numbers.get(i + 2) - numbers.get(i + 3)) == 1 &&
-                Math.abs(numbers.get(i + 3) - numbers.get(i + 5)) == 1) {
-                int sum = productiveOfFive(numbers.subList(i, i + 5));
-                if (sum > result) result = sum;
+        
+        int startIndex = 0;
+        List<Integer> numbersSequance = numbers.subList(startIndex, startIndex + 5);
+        if (isIncludeZero(numbersSequance) > 0) {
+            startIndex = numbers.indexOf(0);
+        } else {
+            result = multipling(numbersSequance);
+            startIndex = 5;
+        }
+        for (int i = startIndex; i < numbers.size() - 1 - 5; i++) {
+            numbersSequance = numbers.subList(i, i + 5);
+            if (isIncludeZero(numbersSequance) > 0) {
+                i += isIncludeZero(numbersSequance);
             }
+            int productive = 1;
+            multipling(numbersSequance);
+            if (productive > result) {
+                result = productive;
+            }
+            iterations++;
         }
         System.out.println("Result: " + result);
         System.out.println("Iterations: " + iterations);
     }
 
-    private static int productiveOfFive(List<Integer> numbers) {
-        int sum = 0;
+    private static int multipling(List<Integer> numbers) {
+        int product = 1;
         for (int number : numbers) {
-            sum *= number;
+            iterations++;
+            product *= number;
         }
-        return sum;
+        return product;
+    }
+    
+    private static int isIncludeZero(List<Integer> numbers) {
+        return numbers.indexOf(0);
     }
 }
